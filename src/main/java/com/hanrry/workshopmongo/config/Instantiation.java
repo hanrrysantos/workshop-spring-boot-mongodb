@@ -3,6 +3,7 @@ package com.hanrry.workshopmongo.config;
 import com.hanrry.workshopmongo.domain.Post;
 import com.hanrry.workshopmongo.domain.User;
 import com.hanrry.workshopmongo.dto.AuthorDTO;
+import com.hanrry.workshopmongo.dto.CommentDTO;
 import com.hanrry.workshopmongo.repositories.PostRepository;
 import com.hanrry.workshopmongo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,13 @@ public class Instantiation implements CommandLineRunner {
                 "Partiu Viagem", "Vou viajar para São Paulo", new AuthorDTO(maria));
         Post post2 = new Post(null, sdf.parse("2025-08-19"),
                 "Bom Dia", "Acordei Feliz Hoje", new AuthorDTO(maria));
+
+        CommentDTO c1 = new CommentDTO("Boa viagem mano", sdf.parse("2024-09-30"), new AuthorDTO(alex));
+        CommentDTO c2 = new CommentDTO("Aproveite!", sdf.parse("2024-10-29"), new AuthorDTO(bob));
+        CommentDTO c3 = new CommentDTO("Tenha um ótimo dia!", sdf.parse("2022-02-06"), new AuthorDTO(alex));
+
+        post1.getComments().addAll(Arrays.asList(c1, c2));
+        post2.getComments().addAll(Arrays.asList(c3));
 
         postRepository.saveAll(Arrays.asList(post1,post2));
 
